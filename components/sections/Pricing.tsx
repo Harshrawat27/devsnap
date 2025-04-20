@@ -86,21 +86,22 @@ const Pricing: FC = () => {
                     </li>
                   ))}
                 </ul>
-
-                <AnimatedButton
-                  href={tier.buttonLink}
-                  color={
-                    colorStyle.buttonColor as
-                      | 'amber'
-                      | 'pink'
-                      | 'green'
-                      | 'blue'
-                      | 'purple'
-                  }
-                  className='w-full text-center'
-                >
-                  {tier.buttonText}
-                </AnimatedButton>
+                <div className='flex flex-col sm:flex-row justify-center gap-6 mb-12 mt-5'>
+                  <AnimatedButton
+                    href={tier.buttonLink}
+                    color={
+                      colorStyle.buttonColor as
+                        | 'amber'
+                        | 'pink'
+                        | 'green'
+                        | 'blue'
+                        | 'purple'
+                    }
+                    className='w-full text-center'
+                  >
+                    {tier.buttonText}
+                  </AnimatedButton>
+                </div>
               </div>
             );
           })}

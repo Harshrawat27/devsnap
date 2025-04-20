@@ -81,9 +81,9 @@ const Features: FC = () => {
           })}
         </div>
 
-        <div className='text-center mt-16'>
-          <AnimatedButton href='/signup' color='blue'>
-            Get Started
+        <div className='flex flex-col sm:flex-row justify-center gap-6 mb-12 mt-20'>
+          <AnimatedButton href='/signup' color='pink'>
+            Sign up - for free
           </AnimatedButton>
         </div>
       </div>

@@ -71,11 +71,11 @@ const Testimonials: FC = () => {
           Why Developers <span className='text-orange-500'>❤️</span> Us
         </h2>
 
-        <div className='grid md:grid-cols-3 gap-6 mt-12'>
+        <div className='columns-1 md:columns-2 lg:columns-3 mt-12'>
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className={`${cardColorArray[index]} p-6 rounded-xl relative overflow-hidden`}
+              className={`${cardColorArray[index]} p-6 rounded-xl relative overflow-hidden mb-5`}
               style={{
                 boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
                 border: '2px solid black',
