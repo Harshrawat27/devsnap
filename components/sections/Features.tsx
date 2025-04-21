@@ -58,7 +58,7 @@ const Features: FC = () => {
           </h2>
         </div>
 
-        <div className='grid md:grid-cols-2 gap-8'>
+        <div className='grid md:grid-cols-3 gap-8'>
           {featuresData.map((item) => {
             // Use color from the item or default to amber
             const colorKey = item.colorTheme || 'amber';
