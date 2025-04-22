@@ -6,18 +6,22 @@ import Pricing from '@/components/sections/Pricing';
 import Testimonials from '@/components/sections/Testimonials';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import DistanceCard from '@/components/card/distance';
+import WaitlistSection from '@/components/sections/WaitlistSection';
 import { FC } from 'react';
 
 const Home: FC = () => {
   return (
     <main className='min-h-screen'>
       <Header />
-      <Hero />
+      <WaitlistSection />
+      {/* <DistanceCard /> */}
+      {/* <Hero />
       <WhyUs />
       <Features />
       <Pricing />
       <Testimonials />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 };

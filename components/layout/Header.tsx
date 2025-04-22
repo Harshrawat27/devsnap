@@ -25,7 +25,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className='sticky top-0 z-50 bg-white border-b-2 border-black'>
+    <header className='sticky w-[100vw] top-0 z-50 bg-white border-b-2 border-black'>
       <div className='container mx-auto px-4 py-4 flex justify-between items-center'>
         <Link href='/' className='flex items-center space-x-2'>
           <div
@@ -45,7 +45,7 @@ const Header: FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className='hidden md:flex space-x-6'>
+        {/* <nav className='hidden md:flex space-x-6'>
           <Link
             href='#features'
             className='text-gray-800 hover:text-orange-500 font-medium'
@@ -69,7 +69,7 @@ const Header: FC = () => {
             How It Works
           </Link>
           <Link
-            href='#pricing'
+            href='/pricing'
             className='text-gray-800 hover:text-orange-500 font-medium'
             style={{
               textDecoration: 'underline',
@@ -79,14 +79,14 @@ const Header: FC = () => {
           >
             Pricing
           </Link>
-        </nav>
+        </nav> */}
 
         <div className='hidden md:flex space-x-4'>
           <AnimatedButton href='/login' color='pink'>
-            Log in
+            End of year
           </AnimatedButton>
           <AnimatedButton href='/signup' color='amber'>
-            Sign up - Free
+            Join Waitlist
           </AnimatedButton>
         </div>
 
@@ -118,7 +118,7 @@ const Header: FC = () => {
           }}
         >
           <nav className='flex flex-col space-y-4'>
-            <Link
+            {/* <Link
               href='#features'
               className='text-gray-800 hover:text-orange-500 font-medium'
               onClick={() => setIsMenuOpen(false)}
@@ -138,21 +138,21 @@ const Header: FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Pricing
-            </Link>
+            </Link> */}
             <div className='flex flex-col space-y-3 pt-3 border-t-2 border-black mt-2'>
               <AnimatedButton
                 href='/login'
                 color='pink'
                 onClick={() => setIsMenuOpen(false)}
               >
-                Log in
+                End of Year
               </AnimatedButton>
               <AnimatedButton
                 href='/signup'
                 color='amber'
                 onClick={() => setIsMenuOpen(false)}
               >
-                Sign up - Free
+                Join waitlist
               </AnimatedButton>
             </div>
           </nav>
