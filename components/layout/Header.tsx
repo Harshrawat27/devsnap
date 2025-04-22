@@ -25,7 +25,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className='sticky w-[100vw] top-0 z-50 bg-white border-b-2 border-black'>
+    <header className='sticky w-[100%] top-0 z-50 bg-white border-b-2 border-black'>
       <div className='container mx-auto px-4 py-4 flex justify-between items-center'>
         <Link href='/' className='flex items-center space-x-2'>
           <div
