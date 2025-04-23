@@ -123,8 +123,9 @@ const WaitlistSection: FC = () => {
             </h2>
             <p className='text-lg md:text-xl text-gray-800 mx-auto mb-12'>
               Share your coding journey with time-limited updates. Connect with
-              peers, integrate with GitHub, and manage projects in an ephemeral,
-              engaging way.
+              like-minded people by sharing your next 3–6 month goals — we'll
+              find your perfect match. Integrate with GitHub and manage projects
+              in an ephemeral, engaging way.
             </p>
 
             {/* Email Input - Top Section */}
@@ -145,7 +146,7 @@ const WaitlistSection: FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder='Your email address'
-                      className='w-full px-4 py-3 rounded-lg border-2 border-black focus:outline-none focus:ring-2 focus:ring-orange-500'
+                      className='w-full px-4 py-3 rounded-lg border-2 border-black focus:outline-none focus:ring-2 focus:ring-[#8976ea]'
                       required
                     />
                   </div>
@@ -242,7 +243,7 @@ const WaitlistSection: FC = () => {
           </div>
 
           {/* Trust Indicators */}
-          <motion.div
+          {/* <motion.div
             className='mt-12 text-sm font-medium flex justify-center gap-6 items-center text-gray-600'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -279,7 +280,7 @@ const WaitlistSection: FC = () => {
               </svg>
               Set up in minutes
             </span>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>
