@@ -1,12 +1,12 @@
 // app/page.tsx
-import Hero from '@/components/sections/Hero';
-import WhyUs from '@/components/sections/WhyUs';
-import Features from '@/components/sections/Features';
-import Pricing from '@/components/sections/Pricing';
-import Testimonials from '@/components/sections/Testimonials';
-import Footer from '@/components/layout/Footer';
+// import Hero from '@/components/sections/Hero';
+// import WhyUs from '@/components/sections/WhyUs';
+// import Features from '@/components/sections/Features';
+// import Pricing from '@/components/sections/Pricing';
+// import Testimonials from '@/components/sections/Testimonials';
+// import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
-import DistanceCard from '@/components/card/distance';
+// import DistanceCard from '@/components/card/distance';
 import WaitlistSection from '@/components/sections/WaitlistSection';
 import { FC } from 'react';
 

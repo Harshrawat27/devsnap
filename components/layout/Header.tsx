@@ -3,23 +3,25 @@
 
 import { useState, FC } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import AnimatedButton from '../ui/AnimatedButton';
+// import { Menu, X } from 'lucide-react';
+// import AnimatedButton from '../ui/AnimatedButton';
 
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const toggleMenu = (): void => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // uncomment when create full menu after application launch
+
+  // const toggleMenu = (): void => {
+  //   setIsMenuOpen(!isMenuOpen);
+  // };
 
   // Logo animation handlers - manually applying the same effect for non-button elements
-  const handleMouseOver = (e: any) => {
+  const handleMouseOver = (e: React.MouseEvent<HTMLElement>) => {
     e.currentTarget.style.transform = 'translate(4px, 4px)';
     e.currentTarget.style.boxShadow = '0px 0px 0px 0px rgba(0, 0, 0, 1)';
   };
 
-  const handleMouseOut = (e: any) => {
+  const handleMouseOut = (e: React.MouseEvent<HTMLElement>) => {
     e.currentTarget.style.transform = 'translate(0, 0)';
     e.currentTarget.style.boxShadow = '3px 3px 0px 0px rgba(0, 0, 0, 1)';
   };

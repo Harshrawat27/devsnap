@@ -15,7 +15,7 @@ const DistanceCard = () => {
         {/* Main Text - Positioned in the lower third */}
         <div className='mt-auto mb-20'>
           <p className='text-white text-2xl font-medium'>
-            You've been in it for the
+            You&apos;ve been in it for the
             <br />
             long haul
           </p>

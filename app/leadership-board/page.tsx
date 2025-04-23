@@ -268,8 +268,8 @@ const DeveloperLeaderboard: FC = () => {
             Developer <span className='text-orange-600'>Leaderboard</span>
           </h2>
           <p className='text-lg text-gray-700 max-w-2xl mx-auto'>
-            See who's leading the pack in the DevSnap community. Climb the ranks
-            by completing your learning goals and helping others!
+            See who&apos;s leading the pack in the DevSnap community. Climb the
+            ranks by completing your learning goals and helping others!
           </p>
         </div>
 

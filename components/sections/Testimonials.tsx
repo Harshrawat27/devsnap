@@ -82,7 +82,7 @@ const Testimonials: FC = () => {
               }}
             >
               <blockquote className='text-gray-800 mb-6 font-medium'>
-                "{testimonial.quote}"
+                &quot{testimonial.quote}&quot
               </blockquote>
 
               <div className='flex items-center'>

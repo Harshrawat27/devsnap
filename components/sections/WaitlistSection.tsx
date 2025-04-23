@@ -1,7 +1,13 @@
 'use client';
 
 import { useState, FormEvent, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  Variants,
+  TargetAndTransition,
+  Transition,
+  motion,
+  VariantLabels,
+} from 'framer-motion';
 
 // Define our types
 interface WaitlistFormState {
@@ -17,9 +23,9 @@ interface Feature {
   description: string;
   icon: React.ReactNode;
   animation: {
-    initial: any;
-    animate: any;
-    transition: any;
+    initial: boolean | TargetAndTransition | VariantLabels | undefined;
+    animate: boolean | TargetAndTransition | VariantLabels | undefined;
+    transition: Transition;
   };
 }
 
@@ -165,8 +171,8 @@ export default function WaitlistSection() {
             </h2>
             <p className='text-lg md:text-xl text-gray-800 mx-auto mb-12'>
               Share your coding journey with time-limited updates. Connect with
-              like-minded people by sharing your next 3–6 month goals — we'll
-              find your perfect match.
+              like-minded people by sharing your next 3–6 month goals —
+              we&apos;ll find your perfect match.
             </p>
 
             {/* Email Input - Top Section */}
@@ -223,7 +229,8 @@ export default function WaitlistSection() {
                       />
                     </svg>
                     <span>
-                      You're on the list! We'll notify you when we launch.
+                      You&apos;re on the list! We&apos;ll notify you when we
+                      launch.
                     </span>
                   </div>
                 )}
