@@ -177,24 +177,24 @@ import {
 } from 'framer-motion';
 
 // Define our types
-interface WaitlistFormState {
-  email: string;
-  isSubmitting: boolean;
-  isSuccess: boolean;
-  isVisible: boolean;
-  errorMessage: string | null;
-}
+// interface WaitlistFormState {
+//   email: string;
+//   isSubmitting: boolean;
+//   isSuccess: boolean;
+//   isVisible: boolean;
+//   errorMessage: string | null;
+// }
 
-interface Feature {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  animation: {
-    initial: boolean | TargetAndTransition | VariantLabels | undefined;
-    animate: boolean | TargetAndTransition | VariantLabels | undefined;
-    transition: Transition;
-  };
-}
+// interface Feature {
+//   title: string;
+//   description: string;
+//   icon: React.ReactNode;
+//   animation: {
+//     initial: boolean | TargetAndTransition | VariantLabels | undefined;
+//     animate: boolean | TargetAndTransition | VariantLabels | undefined;
+//     transition: Transition;
+//   };
+// }
 
 export default function Header() {
   const handleMouseOver = (e: React.MouseEvent<HTMLElement>) => {
