@@ -167,35 +167,6 @@ import Link from 'next/link';
 
 // export default Header;
 
-// import { useState, FormEvent, useEffect } from 'react';
-import {
-  // Variants,
-  TargetAndTransition,
-  Transition,
-  // motion,
-  VariantLabels,
-} from 'framer-motion';
-
-// Define our types
-// interface WaitlistFormState {
-//   email: string;
-//   isSubmitting: boolean;
-//   isSuccess: boolean;
-//   isVisible: boolean;
-//   errorMessage: string | null;
-// }
-
-// interface Feature {
-//   title: string;
-//   description: string;
-//   icon: React.ReactNode;
-//   animation: {
-//     initial: boolean | TargetAndTransition | VariantLabels | undefined;
-//     animate: boolean | TargetAndTransition | VariantLabels | undefined;
-//     transition: Transition;
-//   };
-// }
-
 export default function Header() {
   const handleMouseOver = (e: React.MouseEvent<HTMLElement>) => {
     e.currentTarget.style.transform = 'translate(4px, 4px)';
