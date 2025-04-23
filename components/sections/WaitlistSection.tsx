@@ -1,49 +1,91 @@
 'use client';
 
-import { FC, useState, FormEvent, useEffect } from 'react';
-import { delay, motion } from 'framer-motion';
+import { useState, FormEvent, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-const WaitlistSection: FC = () => {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+// Define our types
+interface WaitlistFormState {
+  email: string;
+  isSubmitting: boolean;
+  isSuccess: boolean;
+  isVisible: boolean;
+  errorMessage: string | null;
+}
+
+interface Feature {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  animation: {
+    initial: any;
+    animate: any;
+    transition: any;
+  };
+}
+
+export default function WaitlistSection() {
+  const [formState, setFormState] = useState<WaitlistFormState>({
+    email: '',
+    isSubmitting: false,
+    isSuccess: false,
+    isVisible: false,
+    errorMessage: null,
+  });
 
   useEffect(() => {
     // Trigger animations after component mounts
-    setIsVisible(true);
+    setFormState((prev) => ({ ...prev, isVisible: true }));
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!formState.email) return;
 
-    setIsSubmitting(true);
+    // Reset state
+    setFormState((prev) => ({
+      ...prev,
+      isSubmitting: true,
+      errorMessage: null,
+    }));
 
-    // Simulate API call - replace with your actual API endpoint
     try {
-      // await fetch('/api/waitlist', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email }),
-      // });
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formState.email }),
+      });
 
-      setTimeout(() => {
-        setIsSuccess(true);
-        setEmail('');
-        setIsSubmitting(false);
-      }, 800);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong!');
+      }
+
+      // Success handling
+      setFormState({
+        email: '',
+        isSubmitting: false,
+        isSuccess: true,
+        isVisible: true,
+        errorMessage: null,
+      });
     } catch (error) {
-      setIsSubmitting(false);
-      console.error('Error submitting to waitlist:', error);
+      // Error handling
+      setFormState((prev) => ({
+        ...prev,
+        isSubmitting: false,
+        errorMessage:
+          error instanceof Error ? error.message : 'Failed to join waitlist',
+      }));
     }
   };
 
-  const features = [
+  // Define features with simpler description strings
+  const features: Feature[] = [
     {
       title: 'GitHub Integration',
       description:
-        'Plug in your GitHub to unlock hidden patterns in your coding behavior—like when you’re most productive, what tech stacks you gravitate toward, and how your coding style evolves over time. You’ll learn things even you didn’t know about yourself.',
+        'Plug in your GitHub to unlock hidden patterns in your coding behavior. Learn when you are most productive and how your coding style evolves over time.',
       icon: (
         <svg
           className='w-8 h-8 text-orange-600'
@@ -62,7 +104,7 @@ const WaitlistSection: FC = () => {
     {
       title: 'Peer Group Coding',
       description:
-        'Find developers working toward the same goals. Get matched based on your projects, learning paths, or vibes. Join peer rooms that spark accountability and collaboration—and vanish when the work’s done.',
+        'Find developers working toward the same goals. Get matched based on your projects and learning paths. Join peer rooms that spark accountability and collaboration.',
       icon: (
         <svg
           className='w-8 h-8 text-blue-600'
@@ -87,7 +129,7 @@ const WaitlistSection: FC = () => {
     {
       title: 'Project Management',
       description:
-        'Built specifically for solo developers. Track your learning journey, share quick daily wins, and keep your momentum going without the overhead of bloated tools. Lightweight, focused, and designed for builders.',
+        'Built specifically for solo developers. Track your learning journey, share quick daily wins, and keep your momentum going without the overhead of bloated tools.',
       icon: (
         <svg
           className='w-8 h-8 text-green-600'
@@ -124,8 +166,7 @@ const WaitlistSection: FC = () => {
             <p className='text-lg md:text-xl text-gray-800 mx-auto mb-12'>
               Share your coding journey with time-limited updates. Connect with
               like-minded people by sharing your next 3–6 month goals — we'll
-              find your perfect match. Integrate with GitHub and manage projects
-              in an ephemeral, engaging way.
+              find your perfect match.
             </p>
 
             {/* Email Input - Top Section */}
@@ -143,8 +184,13 @@ const WaitlistSection: FC = () => {
                   <div className='flex-grow'>
                     <input
                       type='email'
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={formState.email}
+                      onChange={(e) =>
+                        setFormState((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
+                      }
                       placeholder='Your email address'
                       className='w-full px-4 py-3 rounded-lg border-2 border-black focus:outline-none focus:ring-2 focus:ring-[#8976ea]'
                       required
@@ -153,17 +199,17 @@ const WaitlistSection: FC = () => {
                   <div>
                     <button
                       type='submit'
-                      disabled={isSubmitting}
+                      disabled={formState.isSubmitting}
                       className={`px-6 py-3 bg-[#8976ea] hover:bg-[#6f5bd0] text-black font-medium rounded-lg border-2 border-black transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none ${
-                        isSubmitting ? 'opacity-75' : ''
+                        formState.isSubmitting ? 'opacity-75' : ''
                       }`}
                     >
-                      {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                      {formState.isSubmitting ? 'Joining...' : 'Join Waitlist'}
                     </button>
                   </div>
                 </form>
 
-                {isSuccess && (
+                {formState.isSuccess && (
                   <div className='mt-4 p-3 bg-green-100 text-green-700 rounded-lg border-2 border-green-500 flex items-center'>
                     <svg
                       className='w-5 h-5 mr-2 text-green-600'
@@ -174,11 +220,28 @@ const WaitlistSection: FC = () => {
                         fillRule='evenodd'
                         d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
                         clipRule='evenodd'
-                      ></path>
+                      />
                     </svg>
                     <span>
                       You're on the list! We'll notify you when we launch.
                     </span>
+                  </div>
+                )}
+
+                {formState.errorMessage && (
+                  <div className='mt-4 p-3 bg-red-100 text-red-700 rounded-lg border-2 border-red-500 flex items-center'>
+                    <svg
+                      className='w-5 h-5 mr-2 text-red-600'
+                      fill='currentColor'
+                      viewBox='0 0 20 20'
+                    >
+                      <path
+                        fillRule='evenodd'
+                        d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
+                    <span>{formState.errorMessage}</span>
                   </div>
                 )}
               </div>
@@ -187,104 +250,29 @@ const WaitlistSection: FC = () => {
 
           {/* Feature Layout based on sketch */}
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 relative'>
-            {/* Left Feature (comes from left) */}
-            <motion.div
-              className='bg-white p-6 rounded-lg border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all duration-200'
-              initial={features[0].animation.initial}
-              animate={
-                isVisible
-                  ? features[0].animation.animate
-                  : features[0].animation.initial
-              }
-              transition={features[0].animation.transition}
-            >
-              <div className='mb-4 p-3 inline-block bg-gray-100 rounded-lg border-2 border-black'>
-                {features[0].icon}
-              </div>
-              <h3 className='text-xl font-bold mb-2'>{features[0].title}</h3>
-              <p className='text-gray-700'>{features[0].description}</p>
-            </motion.div>
-
-            {/* Center-Top Feature (comes from top) */}
-            <motion.div
-              className='bg-white p-6 rounded-lg border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all duration-200'
-              initial={features[1].animation.initial}
-              animate={
-                isVisible
-                  ? features[1].animation.animate
-                  : features[1].animation.initial
-              }
-              transition={features[1].animation.transition}
-            >
-              <div className='mb-4 p-3 inline-block bg-gray-100 rounded-lg border-2 border-black'>
-                {features[1].icon}
-              </div>
-              <h3 className='text-xl font-bold mb-2'>{features[1].title}</h3>
-              <p className='text-gray-700'>{features[1].description}</p>
-            </motion.div>
-
-            {/* Center-Bottom Feature (comes from bottom) - in mobile this will be the third in vertical order */}
-            <motion.div
-              className='bg-white p-6 rounded-lg border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all duration-200'
-              initial={features[2].animation.initial}
-              animate={
-                isVisible
-                  ? features[2].animation.animate
-                  : features[2].animation.initial
-              }
-              transition={features[2].animation.transition}
-            >
-              <div className='mb-4 p-3 inline-block bg-gray-100 rounded-lg border-2 border-black'>
-                {features[2].icon}
-              </div>
-              <h3 className='text-xl font-bold mb-2'>{features[2].title}</h3>
-              <p className='text-gray-700'>{features[2].description}</p>
-            </motion.div>
+            {/* Features */}
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className='bg-white p-6 rounded-lg border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all duration-200'
+                initial={feature.animation.initial}
+                animate={
+                  formState.isVisible
+                    ? feature.animation.animate
+                    : feature.animation.initial
+                }
+                transition={feature.animation.transition}
+              >
+                <div className='mb-4 p-3 inline-block bg-gray-100 rounded-lg border-2 border-black'>
+                  {feature.icon}
+                </div>
+                <h3 className='text-xl font-bold mb-2'>{feature.title}</h3>
+                <p className='text-gray-700'>{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
-
-          {/* Trust Indicators */}
-          {/* <motion.div
-            className='mt-12 text-sm font-medium flex justify-center gap-6 items-center text-gray-600'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <span className='flex items-center'>
-              <svg
-                className='w-5 h-5 mr-2 text-green-600'
-                fill='currentColor'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-                  clipRule='evenodd'
-                ></path>
-              </svg>
-              No credit card required
-            </span>
-
-            <span className='hidden sm:inline mx-1'>•</span>
-
-            <span className='flex items-center'>
-              <svg
-                className='w-5 h-5 mr-2 text-green-600'
-                fill='currentColor'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-                  clipRule='evenodd'
-                ></path>
-              </svg>
-              Set up in minutes
-            </span>
-          </motion.div> */}
         </div>
       </div>
     </section>
   );
-};
-
-export default WaitlistSection;
+}
