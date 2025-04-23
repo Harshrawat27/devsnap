@@ -26,10 +26,11 @@ const Header: FC = () => {
 
   return (
     <header className='sticky w-[100%] top-0 z-50 bg-white border-b-2 border-black'>
-      <div className='container mx-auto px-4 py-4 flex justify-between items-center'>
+      {/* <div className='container mx-auto px-4 py-4 flex justify-between items-center'> */}
+      <div className='container mx-auto px-4 py-4 flex justify-center items-center'>
         <Link href='/' className='flex items-center space-x-2'>
           <div
-            className='bg-amber-300 px-4 py-2 rounded-lg flex items-center'
+            className='bg-[#8976ea] px-4 py-2 rounded-lg flex items-center'
             style={{
               boxShadow: '3px 3px 0px 0px rgba(0,0,0,1)',
               border: '2px solid black',
@@ -81,17 +82,17 @@ const Header: FC = () => {
           </Link>
         </nav> */}
 
-        <div className='hidden md:flex space-x-4'>
+        {/* <div className='hidden md:flex space-x-4'>
           <AnimatedButton href='/login' color='pink'>
             End of year
           </AnimatedButton>
           <AnimatedButton href='/signup' color='amber'>
             Join Waitlist
           </AnimatedButton>
-        </div>
+        </div> */}
 
         {/* Mobile menu button */}
-        <button
+        {/* <button
           className='md:hidden bg-green-200 p-2 rounded-lg'
           onClick={toggleMenu}
           style={{
@@ -105,7 +106,7 @@ const Header: FC = () => {
           onMouseOut={handleMouseOut}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </button> */}
       </div>
 
       {/* Mobile menu */}
@@ -139,7 +140,7 @@ const Header: FC = () => {
             >
               Pricing
             </Link> */}
-            <div className='flex flex-col space-y-3 pt-3 border-t-2 border-black mt-2'>
+            {/* <div className='flex flex-col space-y-3 pt-3 border-t-2 border-black mt-2'>
               <AnimatedButton
                 href='/login'
                 color='pink'
@@ -154,7 +155,7 @@ const Header: FC = () => {
               >
                 Join waitlist
               </AnimatedButton>
-            </div>
+            </div> */}
           </nav>
         </div>
       )}

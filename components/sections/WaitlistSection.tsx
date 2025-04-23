@@ -1,161 +1,3 @@
-// // components/sections/WaitlistSection.tsx
-// 'use client';
-
-// import { FC, useState, FormEvent } from 'react';
-// import AnimatedButton from '../ui/AnimatedButton';
-
-// const WaitlistSection: FC = () => {
-//   const [email, setEmail] = useState('');
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const [isSuccess, setIsSuccess] = useState(false);
-
-//   const handleSubmit = async (e: FormEvent) => {
-//     e.preventDefault();
-//     if (!email) return;
-
-//     setIsSubmitting(true);
-
-//     // Simulate API call - replace with your actual API endpoint
-//     try {
-//       // await fetch('/api/waitlist', {
-//       //   method: 'POST',
-//       //   headers: { 'Content-Type': 'application/json' },
-//       //   body: JSON.stringify({ email }),
-//       // });
-
-//       // Success state
-//       setTimeout(() => {
-//         setIsSuccess(true);
-//         setEmail('');
-//         setIsSubmitting(false);
-//       }, 800);
-//     } catch (error) {
-//       setIsSubmitting(false);
-//       console.error('Error submitting to waitlist:', error);
-//     }
-//   };
-
-//   return (
-//     <section className='h-screen bg-white flex items-center'>
-//       <div className='container mx-auto px-4 flex flex-col lg:flex-row'>
-//         {/* Left Side: Content and Form */}
-//         <div className='w-full lg:w-1/2 flex flex-col justify-center lg:pr-12 mb-10 lg:mb-0'>
-//           <h2 className='text-4xl md:text-5xl font-bold mb-6'>
-//             Join our <span className='text-orange-600'>waitlist</span> today
-//           </h2>
-
-//           <p className='text-lg md:text-xl text-gray-800 mb-8'>
-//             Be the first to experience DevSnap when we launch. Get early access
-//             to connect with developers who share your learning goals.
-//           </p>
-
-//           <form onSubmit={handleSubmit} className='max-w-md'>
-//             <div className='flex flex-col sm:flex-row gap-3'>
-//               <div className='flex-grow'>
-//                 <input
-//                   type='email'
-//                   value={email}
-//                   onChange={(e) => setEmail(e.target.value)}
-//                   placeholder='Your email address'
-//                   className='w-full px-4 py-3 rounded-lg border-2 border-black focus:outline-none focus:ring-2 focus:ring-orange-500'
-//                   required
-//                 />
-//               </div>
-//               <div>
-//                 <button
-//                   type='submit'
-//                   disabled={isSubmitting}
-//                   className={`px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg border-2 border-black transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none ${
-//                     isSubmitting ? 'opacity-75' : ''
-//                   }`}
-//                 >
-//                   {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-//                 </button>
-//               </div>
-//             </div>
-
-//             {isSuccess && (
-//               <div className='mt-4 p-3 bg-green-100 text-green-700 rounded-lg border-2 border-green-500 flex items-center'>
-//                 <svg
-//                   className='w-5 h-5 mr-2 text-green-600'
-//                   fill='currentColor'
-//                   viewBox='0 0 20 20'
-//                 >
-//                   <path
-//                     fillRule='evenodd'
-//                     d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-//                     clipRule='evenodd'
-//                   ></path>
-//                 </svg>
-//                 <span>
-//                   You're on the list! We'll notify you when we launch.
-//                 </span>
-//               </div>
-//             )}
-
-//             <div className='mt-6 text-sm font-medium flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center text-gray-600'>
-//               <span className='flex items-center'>
-//                 <svg
-//                   className='w-5 h-5 mr-2 text-green-600'
-//                   fill='currentColor'
-//                   viewBox='0 0 20 20'
-//                 >
-//                   <path
-//                     fillRule='evenodd'
-//                     d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-//                     clipRule='evenodd'
-//                   ></path>
-//                 </svg>
-//                 No spam, ever
-//               </span>
-
-//               <span className='hidden sm:inline mx-1'>•</span>
-
-//               <span className='flex items-center'>
-//                 <svg
-//                   className='w-5 h-5 mr-2 text-green-600'
-//                   fill='currentColor'
-//                   viewBox='0 0 20 20'
-//                 >
-//                   <path
-//                     fillRule='evenodd'
-//                     d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-//                     clipRule='evenodd'
-//                   ></path>
-//                 </svg>
-//                 Unsubscribe anytime
-//               </span>
-//             </div>
-//           </form>
-//         </div>
-
-//         {/* Right Side: Image */}
-//         <div className='w-[400px] lg:w-1/2 flex items-center justify-center'>
-//           {/* <div className='relative w-full max-w-lg aspect-square rounded-xl border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden'> */}
-//           {/* Replace with your actual image */}
-//           <img
-//             src='/assets/hero-section-home.png'
-//             alt='Developers collaborating'
-//             className='w-full h-full object-cover'
-//           />
-
-//           {/* Optional image overlay elements similar to the theme */}
-//           {/* <div className='absolute bottom-4 left-4 right-4 bg-white/90 p-3 rounded-lg border-2 border-black'>
-//             <p className='font-medium text-center text-gray-800'>
-//               Connect with developers on similar learning paths
-//             </p>
-//           </div> */}
-//           {/* </div> */}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default WaitlistSection;
-
-// components/sections/FeatureWaitlistSection.tsx
-// components/sections/AnimatedFeatureSection.tsx
 'use client';
 
 import { FC, useState, FormEvent, useEffect } from 'react';
@@ -276,7 +118,7 @@ const WaitlistSection: FC = () => {
           {/* Header */}
           <div className='text-center mb-12'>
             <h2 className='text-4xl md:text-5xl font-bold mb-6'>
-              <span className='text-orange-600'>DevSnap</span> - Snapchat for
+              <span className='text-[#8976ea]'>DevSnap</span> - Snapchat for
               Developers
             </h2>
             <p className='text-lg md:text-xl text-gray-800 mx-auto mb-12'>
@@ -311,7 +153,7 @@ const WaitlistSection: FC = () => {
                     <button
                       type='submit'
                       disabled={isSubmitting}
-                      className={`px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg border-2 border-black transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none ${
+                      className={`px-6 py-3 bg-[#8976ea] hover:bg-[#6f5bd0] text-black font-medium rounded-lg border-2 border-black transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active:shadow-none ${
                         isSubmitting ? 'opacity-75' : ''
                       }`}
                     >

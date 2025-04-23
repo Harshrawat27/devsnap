@@ -10,6 +10,23 @@ export const metadata: Metadata = {
   title: 'DevSnap - Connect with like-minded developers',
   description:
     'Share your learning goals and connect with developers on similar paths. Build your portfolio and track your progress together.',
+  openGraph: {
+    title: 'DevSnap - Connect with like-minded developers',
+    description:
+      'Share your learning goals and connect with developers on similar paths. Build your portfolio and track your progress together.',
+    url: 'https://www.devsn.app/',
+    siteName: 'GitHubFolio',
+    images: [
+      {
+        url: 'https://www.devsn.app/devsnapOG.png',
+        width: 1200,
+        height: 630,
+        alt: 'Opengraph',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 interface RootLayoutProps {
