@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'GitHubFolio',
     images: [
       {
-        url: 'https://www.devsn.app/devsnapOG.png',
+        url: 'https://www.devsn.app/devsnapog.png',
         width: 1200,
         height: 630,
         alt: 'Opengraph',
