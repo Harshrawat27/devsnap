@@ -17,13 +17,6 @@ const Home: FC = () => {
     <main className='min-h-screen'>
       <Header />
       <WaitlistSection />
-      {/* Commented components can be uncommented later
-      <Hero />
-      <WhyUs />
-      <Features />
-      <Pricing />
-      <Testimonials />
-      <Footer /> */}
     </main>
   );
 };

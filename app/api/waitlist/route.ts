@@ -2,10 +2,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { WaitlistEntry } from '@/types/waitlist';
+import { extractUsernameFromEmail } from '@/utils/email';
 
 export async function POST(request: NextRequest) {
   try {
-    // Updated to extract referral parameter
+    // Extract data from request
     const { email, referral } = (await request.json()) as {
       email: string;
       referral?: string;
@@ -37,23 +38,47 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create waitlist entry with referral info if available
+    // Extract username from email
+    const username = extractUsernameFromEmail(email);
+
+    // Validate the referral if provided
+    let validReferral = false;
+    if (referral) {
+      // Check if the referral username exists in the database
+      const referringUser = await db
+        .collection('waitlist')
+        .findOne({ username: referral });
+      validReferral = !!referringUser;
+    }
+
+    // Create waitlist entry with username, referral (if valid), and initialize referralCount
     const waitlistEntry: WaitlistEntry = {
       email,
+      username,
       signupDate: new Date(),
       source: request.headers.get('referer') || 'direct',
-      // Add referral if it exists
-      ...(referral && { referral }),
+      referralCount: 0, // Initialize referral count to zero
+      // Only add the referral if it's valid
+      ...(validReferral && referral ? { referral } : {}),
     };
 
-    // Insert into database
+    // Insert the new user into the database
     await db.collection('waitlist').insertOne(waitlistEntry);
+
+    // If there's a valid referral, increment the referral count for the referring user
+    if (validReferral && referral) {
+      await db
+        .collection('waitlist')
+        .updateOne({ username: referral }, { $inc: { referralCount: 1 } });
+    }
 
     // Return success
     return NextResponse.json(
       {
         success: true,
         message: 'Successfully added to waitlist',
+        username, // Return the generated username
+        referralValid: validReferral, // Optionally inform if referral was valid
       },
       { status: 200 }
     );
