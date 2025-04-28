@@ -246,7 +246,7 @@ export default function WaitlistSection() {
                       </span>
                     </div>
 
-                    {formState.username && (
+                    {/* {formState.username && (
                       <div className='bg-white p-3 rounded border border-green-300 w-full mt-2'>
                         <p className='text-xs text-green-600 mb-1'>
                           YOUR REFERRAL LINK:
@@ -258,7 +258,7 @@ export default function WaitlistSection() {
                           Share this link to earn referral points!
                         </p>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 )}
 
