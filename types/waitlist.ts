@@ -3,6 +3,7 @@ export interface WaitlistEntry {
   email: string;
   signupDate: Date;
   source?: string;
+  referral?: string; // Added referral field
   metadata?: Record<string, any>;
 }
 

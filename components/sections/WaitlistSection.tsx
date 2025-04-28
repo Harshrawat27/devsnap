@@ -2,12 +2,12 @@
 
 import { useState, FormEvent, useEffect } from 'react';
 import {
-  // Variants,
   TargetAndTransition,
   Transition,
   motion,
   VariantLabels,
 } from 'framer-motion';
+import { captureReferralFromURL, getStoredReferral } from '@/utils/referral';
 
 // Define our types
 interface WaitlistFormState {
@@ -41,6 +41,9 @@ export default function WaitlistSection() {
   useEffect(() => {
     // Trigger animations after component mounts
     setFormState((prev) => ({ ...prev, isVisible: true }));
+
+    // Capture referral from URL if present
+    captureReferralFromURL();
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -55,10 +58,16 @@ export default function WaitlistSection() {
     }));
 
     try {
+      // Get the stored referral code if available
+      const referral = getStoredReferral();
+
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formState.email }),
+        body: JSON.stringify({
+          email: formState.email,
+          referral: referral || undefined, // Add referral to request if present
+        }),
       });
 
       const data = await response.json();

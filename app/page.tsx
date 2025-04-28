@@ -1,22 +1,24 @@
 // app/page.tsx
-// import Hero from '@/components/sections/Hero';
-// import WhyUs from '@/components/sections/WhyUs';
-// import Features from '@/components/sections/Features';
-// import Pricing from '@/components/sections/Pricing';
-// import Testimonials from '@/components/sections/Testimonials';
-// import Footer from '@/components/layout/Footer';
+'use client';
+
+import { useEffect } from 'react';
 import Header from '@/components/layout/Header';
-// import DistanceCard from '@/components/card/distance';
 import WaitlistSection from '@/components/sections/WaitlistSection';
+import { captureReferralFromURL } from '@/utils/referral';
 import { FC } from 'react';
 
 const Home: FC = () => {
+  useEffect(() => {
+    // Capture referral from URL on page load
+    captureReferralFromURL();
+  }, []);
+
   return (
     <main className='min-h-screen'>
       <Header />
       <WaitlistSection />
-      {/* <DistanceCard /> */}
-      {/* <Hero />
+      {/* Commented components can be uncommented later
+      <Hero />
       <WhyUs />
       <Features />
       <Pricing />

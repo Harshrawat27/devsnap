@@ -5,7 +5,11 @@ import { WaitlistEntry } from '@/types/waitlist';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = (await request.json()) as { email: string };
+    // Updated to extract referral parameter
+    const { email, referral } = (await request.json()) as {
+      email: string;
+      referral?: string;
+    };
 
     // Validate email
     if (!email || !email.includes('@')) {
@@ -33,11 +37,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create waitlist entry
+    // Create waitlist entry with referral info if available
     const waitlistEntry: WaitlistEntry = {
       email,
       signupDate: new Date(),
       source: request.headers.get('referer') || 'direct',
+      // Add referral if it exists
+      ...(referral && { referral }),
     };
 
     // Insert into database
