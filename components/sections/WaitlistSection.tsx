@@ -171,8 +171,8 @@ export default function WaitlistSection() {
             </h2>
             <p className='text-lg md:text-xl text-gray-800 mx-auto mb-12'>
               Share your coding journey with time-limited updates. Connect with
-              like-minded people by sharing your next 3–6 month goals —
-              we&apos;ll find your perfect match.
+              like-minded people by sharing your next 3-6 month goals we&apos;ll
+              find your perfect match.
             </p>
 
             {/* Email Input - Top Section */}
