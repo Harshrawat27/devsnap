@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'DevSnap - Connect with like-minded developers',
   description:
     'Share your learning goals and connect with developers on similar paths. Build your portfolio and track your progress together.',
+  metadataBase: new URL('https://www.devsn.app/'),
   openGraph: {
     title: 'DevSnap - Connect with like-minded developers',
     description:
@@ -25,8 +26,19 @@ export const metadata: Metadata = {
         alt: 'Opengraph',
       },
     ],
+
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [
+      {
+        url: '/path/to/your-image.jpg?v=' + Date.now(),
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
